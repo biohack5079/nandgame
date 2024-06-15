@@ -7,11 +7,11 @@ import numpy as np
 def AND(X1, X2):
     a = 1
     b = 1
-    c = 1.0001
+    c = 1
     x = np.array([X1, X2])
     w = np.array([a, b])
     
-    if np.sum(w * x) > c:
+    if np.sum(w * x) <= c:
         y = 1
     else:
         y = 0
@@ -40,17 +40,29 @@ def NAND(X1, X2):
     else:
         y = 0
     return y
+
+def NOR(X1, X2):
+    a = -1
+    b = -1
+    c = -0.9999
+    x = np.array([X1, X2])
+    w = np.array([a, b])
+    if np.sum(w * x) > c:
+        y = 1
+    else:
+        y = 0
+    return y
+
+
     
 """
-ＮＡＮＤで構成
+ＮＡＮＤでＸＯＲを構成
 """
   
 
 def XOR(x1, x2):
     return NAND(NAND(NAND(x1, x2),x2), NAND(x1,NAND(x1, x2)))
     
-def NOR(x1, x2):
-    return NAND(NAND(NAND(x1, x1), NAND(x2, x2)), NAND(NAND(x1, x1), NAND(x2, x2)))
     
 print('AND(1, 1)=' + str(AND(1, 1)) + ' AND(1, 0)=' + str(AND(1, 0)) + ' AND(0, 0)=' + str(AND(0, 0))) 
 print('OR(1, 1)=' + str(OR(1, 1)) + ' OR(1, 0)=' + str(OR(1, 0)) + ' OR(0, 0)=' + str(OR(0, 0)))
