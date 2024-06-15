@@ -42,7 +42,7 @@ print('XOR=' + str(XOR(x, y))) # XOR
 
 
 
-x = int(input('１を０で入力してください x= '))
+x = int(input('１か０で入力してください x= '))
 
 def NOT(x):
     return NAND(x, x)
