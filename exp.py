@@ -54,14 +54,35 @@ def NOR(X1, X2):
     return y
 
 
+"""
+
+単純パーセプトロンではＸＯＲは作れない
+
+def XOR(X1, X2):
+    a = -0.9999
+    b = -0.9999
+    c = -1.0001
+    x = np.array([X1, X2])
+    w = np.array([a, b])
+    if np.sum(w * x) > c:
+        y = 1
+    else:
+        y = 0
+    return y
     
 """
-ＮＡＮＤでＸＯＲを構成
-"""
+
+
+    
+
+# ＮＡＮＤでＸＯＲを構成
+
   
 
 def XOR(x1, x2):
     return NAND(NAND(NAND(x1, x2),x2), NAND(x1,NAND(x1, x2)))
+
+
     
     
 print('AND(1, 1)=' + str(AND(1, 1)) + ' AND(1, 0)=' + str(AND(1, 0)) + ' AND(0, 0)=' + str(AND(0, 0))) 
