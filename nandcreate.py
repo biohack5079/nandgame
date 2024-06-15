@@ -2,43 +2,43 @@
 
 import numpy as np
 
-x1 = int(input('１か０を入力してください x1: '))
-x2 = int(input('１か０を入力してください x2: '))
+x = int(input('１か０を入力してください x: '))
+y = int(input('１か０を入力してください y: '))
 
-def NAND(X1, X2):
-    x = np.array([X1, X2])
-    w = np.array([-0.5, -0.5])
-    s = -0.75  
+def NAND(x, y):
+    x = np.array([x, y])
+    w = np.array([-1, -1])
+    s = -1.5  
     if np.sum(w * x) - s > 0:
-        y = 1
+        z = 1
     else:
-        y = 0
-    return y
+        z = 0
+    return z
     
 """  
 デフォルトの論理回路で書くと
-def nand(x1, x2):
-    return not (x1 and x2)
+def nand(x, y):
+    return not (x and y)
 """
 
-def AND(x1, x2):
-    return NAND(NAND(x1, x2), NAND(x1, x2))
+def AND(x, y):
+    return NAND(NAND(x, y), NAND(x, y))
     
-def OR(x1, x2):
-    return NAND(NAND(x1, x1), NAND(x2, x2))    
+def OR(x, y):
+    return NAND(NAND(x, y), NAND(x, y))    
 
-def XOR(x1, x2):
-    return NAND(NAND(NAND(x1, x2),x2), NAND(x1,NAND(x1, x2)))
+def XOR(x, y):
+    return NAND(NAND(NAND(x, y),y), NAND(x,NAND(x, y)))
     
-def NOR(x1, x2):
-    return NAND(NAND(NAND(x1, x1), NAND(x2, x2)), NAND(NAND(x1, x1), NAND(x2, x2)))
+def NOR(x, y):
+    return NAND(NAND(NAND(x, y), NAND(x, y)), NAND(NAND(x, y), NAND(x, y)))
 
-print('AND=' + str(AND(x1, x2))) # AND
-print('OR=' + str(OR(x1, x2))) # OR
-print('NAND=' + str(NAND(x1, x2))) # NAND
-print('NOR=' + str(NOR(x1, x2))) # NOR
+print('AND=' + str(AND(x, y))) # AND
+print('OR=' + str(OR(x, y))) # OR
+print('NAND=' + str(NAND(x, y))) # NAND
+print('NOR=' + str(NOR(x, y))) # NOR
 
-print('XOR=' + str(XOR(x1, x2))) # XOR
+print('XOR=' + str(XOR(x, y))) # XOR
 
 
 
