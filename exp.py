@@ -11,7 +11,7 @@ def AND(X1, X2):
     x = np.array([X1, X2])
     w = np.array([a, b])
     
-    if np.sum(w * x) <= c:
+    if np.sum(w * x) > c:
         y = 1
     else:
         y = 0
@@ -70,4 +70,3 @@ print('OR(1, 1)=' + str(OR(1, 1)) + ' OR(1, 0)=' + str(OR(1, 0)) + ' OR(0, 0)=' 
 print('NAND(1, 1)=' + str(NAND(1, 1)) + ' NAND(1, 0)=' + str(NAND(1, 0)) + ' NAND(0, 0)=' + str(NAND(0, 0)))
 print('NOR(1, 1)=' + str(NOR(1, 1)) + ' NOR(1, 0)=' + str(NOR(1, 0)) + ' NOR(0, 0)=' + str(NOR(0, 0)))
 print('XOR(1, 1)=' + str(XOR(1, 1)) + ' XOR(1, 0)=' + str(XOR(1, 0)) + ' XOR(0, 0)=' + str(XOR(0, 0)))
-
