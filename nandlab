@@ -1,7 +1,7 @@
 import numpy as np
 
 """
-パーセプトロンから論理回路
+パーセプトロンから論理回路を構成
 """
 
 def NAND(X1, X2):
@@ -58,6 +58,8 @@ def OR(X1, X2):
 
 単純パーセプトロンではＸＯＲは作れない
 
+×
+
 def XOR(X1, X2):
     a = -0.9999
     b = -0.9999
@@ -65,9 +67,9 @@ def XOR(X1, X2):
     x = np.array([X1, X2])
     w = np.array([a, b])
     if np.sum(w * x) > c:
-        y = 1
-    else:
         y = 0
+    else:
+        y = 1
     return y
 
 """
