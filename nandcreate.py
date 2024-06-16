@@ -8,7 +8,7 @@ y = int(input('１か０を入力してください y: '))
 def NAND(x, y):
     r = np.array([x, y])
     w = np.array([-1, -1])
-    s = -1.5  
+    s = -1.5 #threshold
     if np.sum(w * r) - s > 0:
         z = 1
     else:
