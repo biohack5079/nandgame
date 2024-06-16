@@ -25,7 +25,7 @@ def AND(x, y):
     return NAND(NAND(x, y), NAND(x, y))
     
 def OR(x, y):
-    return NAND(NAND(x, y), NAND(x, y))    
+    return NAND(NAND(x, x), NAND(y, y))    
 
 def XOR(x, y):
     return NAND(NAND(NAND(x, y),y), NAND(x,NAND(x, y)))
@@ -48,4 +48,3 @@ def NOT(x):
     return NAND(x, x)
     
 print('NOT=' + str(NOT(x))) # NOT=NOT(x)
-
