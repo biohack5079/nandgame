@@ -6,16 +6,36 @@ x = int(input('１か０を入力してください x: '))
 y = int(input('１か０を入力してください y: '))
 r = np.array([x, y])
 w = np.array([1, 1])
-s = -1.5 #threshold
-m = np.dot(w,r) + s
 
-print('単純パーセプトロンの値')
-print(m)
+
 
 # シグモイド関数
 def sigmoid(x):
-  return 1 / (1 + np.exp(-x)) -0.5
-
+  return 2 / (1 + np.exp(-x)) -1
+  
+s = -1.5 #threshold
+m = np.dot(w,r) + s
+print('符号に注目してください')
+print('andパーセプトロンの値')
+print(m)
+print('シグモイドパーセプトロンの値')
+print(sigmoid(m))
+s = -0.5 #threshold
+m = np.dot(w,r) + s
+print('orパーセプトロンの値')
+print(m)
+print('シグモイドパーセプトロンの値')
+print(sigmoid(m))
+s = 0.5 #threshold
+m = np.dot(w,r) + s
+print('orパーセプトロンの値')
+print(m)
+print('シグモイドパーセプトロンの値')
+print(sigmoid(m))
+s = 1.5 #threshold
+m = np.dot(w,r) + s
+print('nandパーセプトロンの値')
+print(m)
 print('シグモイドパーセプトロンの値')
 print(sigmoid(m))
   
