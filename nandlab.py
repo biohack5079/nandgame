@@ -11,30 +11,32 @@ w = np.array([1, 1])
 
 # シグモイド関数
 def sigmoid(x):
-  return 2 / (1 + np.exp(-x)) -1
+  return 8 / (1 + np.exp(-x)) - 4
   
-s = -1.5 #threshold
-m = np.dot(w,r) + s
+s = 1.5 #threshold
+m = np.dot(w,r) - s
 print('符号に注目してください')
 print('andパーセプトロンの値')
 print(m)
 print('シグモイドパーセプトロンの値')
 print(sigmoid(m))
-s = -0.5 #threshold
-m = np.dot(w,r) + s
-print('orパーセプトロンの値')
-print(m)
-print('シグモイドパーセプトロンの値')
-print(sigmoid(m))
 s = 0.5 #threshold
-m = np.dot(w,r) + s
+m = np.dot(w,r) - s
 print('orパーセプトロンの値')
 print(m)
 print('シグモイドパーセプトロンの値')
 print(sigmoid(m))
-s = 1.5 #threshold
-m = np.dot(w,r) + s
+
+s = -1.5 #threshold
+m = np.dot(w,r) - s
 print('nandパーセプトロンの値')
+print(m)
+print('シグモイドパーセプトロンの値')
+print(sigmoid(m))
+
+s = -0.5 #threshold
+m = np.dot(w,r) - s
+print('norパーセプトロンの値')
 print(m)
 print('シグモイドパーセプトロンの値')
 print(sigmoid(m))
@@ -43,8 +45,8 @@ print(sigmoid(m))
 def AND(x, y):
     r = np.array([x, y])
     w = np.array([1, 1])
-    s = -1.5 #threshold
-    m = np.dot(w,r) + s
+    s = 1.5 #threshold
+    m = np.dot(w,r) - s
         
     if sigmoid(m) > 0:
         z = 1
@@ -55,8 +57,8 @@ def AND(x, y):
 def OR(x, y):
     r = np.array([x, y])
     w = np.array([1, 1])
-    s = -0.5 #threshold
-    m = np.dot(w,r) + s
+    s = 0.5 #threshold
+    m = np.dot(w,r) - s
         
     if sigmoid(m) > 0:
         z = 1
@@ -67,8 +69,8 @@ def OR(x, y):
 def NAND(x, y):
     r = np.array([x, y])
     w = np.array([-1, -1])
-    s = 1.5 #threshold
-    m = np.dot(w,r) + s
+    s = -1.5 #threshold
+    m = np.dot(w,r) - s
         
     if sigmoid(m) > 0:
         z = 1
@@ -79,8 +81,8 @@ def NAND(x, y):
 def NOR(x, y):
     r = np.array([x, y])
     w = np.array([-1, -1])
-    s = 0.5 #threshold
-    m = np.dot(w,r) + s
+    s = -0.5 #threshold
+    m = np.dot(w,r) - s
         
     if sigmoid(m) > 0:
         z = 1
