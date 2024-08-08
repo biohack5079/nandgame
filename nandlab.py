@@ -11,7 +11,7 @@ w = np.array([1, 1])
 
 # シグモイド関数
 def sigmoid(x):
-  return 8 / (1 + np.exp(-x)) - 4
+  return 4 / (1 + np.exp(-x)) - 2
   
 s = 1.5 #threshold
 m = np.dot(w,r) - s
@@ -28,14 +28,14 @@ print('シグモイドパーセプトロンの値')
 print(sigmoid(m))
 
 s = -1.5 #threshold
-m = np.dot(w,r) - s
+m = np.dot(-w,r) - s
 print('nandパーセプトロンの値')
 print(m)
 print('シグモイドパーセプトロンの値')
 print(sigmoid(m))
 
 s = -0.5 #threshold
-m = np.dot(w,r) - s
+m = np.dot(-w,r) - s
 print('norパーセプトロンの値')
 print(m)
 print('シグモイドパーセプトロンの値')
