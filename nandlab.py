@@ -2,6 +2,7 @@
 
 import numpy as np
 
+
 x = int(input('１か０を入力してください x: '))
 y = int(input('１か０を入力してください y: '))
 r = np.array([x, y])
@@ -127,3 +128,10 @@ def NOT(x):
     return NAND(x, x)
     
 print('NOT=' + str(NOT(x))) # NOT=NOT(x)
+
+print('シグモイド関数を表示します')
+import matplotlib.pylab as plt
+x = np.arange(-10.0, 10.0, 0.01)
+y = sigmoid(x)
+plt.plot(x, y)
+plt.show()
