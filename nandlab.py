@@ -107,7 +107,7 @@ def NOT(x):
     
 print('NOT=' + str(NOT(x))) # NOT=NOT(x)
 
-print('ゲームオーバー')
+print('ゲームクリア')
 print('活性化関数を表示します')
 import matplotlib.pylab as plt
 x = np.arange(-10.0, 10.0, 0.1)
