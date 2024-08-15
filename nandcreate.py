@@ -92,6 +92,8 @@ print('OR=' + str(OR(x, y))) # OR
 print('NAND=' + str(NAND(x, y))) # NAND
 print('NOR=' + str(NOR(x, y))) # NOR
 
+def NAND(x, y):
+    return 1-x*y
 
 def AND(x, y):
     return NAND(NAND(x, y), NAND(x, y))
@@ -117,12 +119,12 @@ print('XOR=' + str(XOR(x, y))) # XOR
 
 
 
-x = int(input('１か０を入力してください x= '))
+z = int(input('１か０を入力してください z= '))
 
-def NOT(x):
-    return NAND(x, x)
+def NOT(z):
+    return NAND(z, z)
     
-print('NOT=' + str(NOT(x))) # NOT=NOT(x)
+print('NOT=' + str(NOT(z))) # NOT=NOT(z)
 
 print('ゲームオーバー！')
 print('活性化関数をかまします。')
