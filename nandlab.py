@@ -134,12 +134,19 @@ def NOT(z):
     
 print('NOT(z)=' + str(NOT(z))) # NOT=NOT(z)
 
-if NAND(x, y) != (0 or 1):
+if str(XNOR(x, y)) == '0' or str(XNOR(x, y)) == '1':
+    print('ゲームクリア')
+else:
     print('ゲームオーバー！')
     print('活性化関数をかまします。')
 
     import matplotlib.pylab as plt
     x = np.arange(-10.0, 10.0, 0.1)
-    y = f(x)
-    plt.plot(x, y)
+    z = f(x)
+    plt.plot(x, z)
     plt.show()
+    z = f(XNOR(x, y))
+    plt.plot(x, z)
+    plt.show()
+    
+    
