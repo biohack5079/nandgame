@@ -92,6 +92,9 @@ print('OR=' + str(OR(x, y))) # OR
 print('NAND=' + str(NAND(x, y))) # NAND
 print('NOR=' + str(NOR(x, y))) # NOR
 
+
+
+
 def NAND(x, y):
     return 1-x*y
 
@@ -124,15 +127,14 @@ z = int(input('１か０を入力してください z= '))
 def NOT(z):
     return NAND(z, z)
     
-print('NOT=' + str(NOT(z))) # NOT=NOT(z)
+print('NOT(z)=' + str(NOT(z))) # NOT=NOT(z)
 
-print('ゲームオーバー！')
-print('活性化関数をかまします。')
+if NAND(x, y)!= (0 or 1):
+    print('ゲームオーバー！')
+    print('活性化関数をかまします。')
 
-
-
-import matplotlib.pylab as plt
-x = np.arange(-10.0, 10.0, 0.1)
-y = f(x)
-plt.plot(x, y)
-plt.show()
+    import matplotlib.pylab as plt
+    x = np.arange(-10.0, 10.0, 0.1)
+    y = f(x)
+    plt.plot(x, y)
+    plt.show()
