@@ -129,7 +129,7 @@ def NOT(z):
     
 print('NOT(z)=' + str(NOT(z))) # NOT=NOT(z)
 
-if NAND(x, y)!= (0 or 1):
+if NAND(x, y) != (0 or 1):
     print('ゲームオーバー！')
     print('活性化関数をかまします。')
 
