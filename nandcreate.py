@@ -13,6 +13,8 @@ w = np.array([2, 2])
 # step関数
 def f(x):
     return np.where(x > 0, 1, 0)
+
+
 #AND  
 s= 3 #threshold
 m = np.dot(w,r) - s
