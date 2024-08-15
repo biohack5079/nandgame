@@ -96,22 +96,23 @@ print('NOR=' + str(NOR(x, y))) # NOR
 
 
 def NAND(x, y):
-    return 1-x*y #1-xy
+    return 1-x*y # =1-xy
 
 def AND(x, y):
-    return NAND(NAND(x, y), NAND(x, y)) #xy
+    return NAND(NAND(x, y), NAND(x, y)) # =xy
     
 def OR(x, y):
-    return NAND(NAND(x, x), NAND(y, y)) #x+y-xy 
-
-def XOR(x, y):
-    return NAND(NAND(NAND(x, y),y), NAND(x,NAND(x, y))) #x+y-2xy
+    return NAND(NAND(x, x), NAND(y, y)) # =x+y-xy 
     
 def NOR(x, y):
-    return NAND( NAND(NAND(x, x), NAND(y, y)), NAND(NAND(x, x), NAND(y, y)) ) #xy-x-y+1
+    return NAND( NAND(NAND(x, x), NAND(y, y)), NAND(NAND(x, x), NAND(y, y)) ) # =xy-x-y+1
+
+def XOR(x, y):
+    return NAND(NAND(NAND(x, y),y), NAND(x,NAND(x, y))) # =x+y-2xy
 
 def XNOR(x, y):
-    return 1+2*x*y-x-y #1+2xy-x-y
+    return NAND( NAND(NAND(NAND(x, y),y), NAND(x,NAND(x, y))) , NAND(NAND(NAND(x, y),y), NAND(x,NAND(x, y))) ) # =1+2xy-x-y
+
 
 
 
