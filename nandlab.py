@@ -1,72 +1,88 @@
-# float関数パーセプトロン
+# NANDからXORを創るゲーム
+
 
 import numpy as np
 
-
+#テスト
 x = int(input('１か０を入力してください x: '))
 y = int(input('１か０を入力してください y: '))
 r = np.array([x, y])
-w = np.array([1, 1])
-
+w = np.array([2, 2]) 
 
 
 # sigmoid関数
 def f(x):
     return 4/(1 + np.exp(-x))-2
-  
-s = 3 #threshold
-m = 2*np.dot(w,r) - s
+
+#テスト
+
+#AND  
+s= 3 #threshold
+m = np.dot(w,r) - s
 print('符号に注目してください')
 print('andパーセプトロンの値')
 print(m)
 print('関数パーセプトロンの値')
 print(f(m))
 
+#OR
 s = 1 #threshold
-m = 2*np.dot(w,r) - s
+m = np.dot(w,r) - s
 print('orパーセプトロンの値')
 print(m)
 print('関数パーセプトロンの値')
 print(f(m))
 
+#NAND
 s = -3 #threshold
-m = 2*np.dot(-w,r) - s
+m = np.dot(-w,r) - s
 print('nandパーセプトロンの値')
 print(m)
 print('関数パーセプトロンの値')
 print(f(m))
 
+#NOR
 s = -1 #threshold
-m = 2*np.dot(-w,r) - s
+m = np.dot(-w,r) - s
 print('norパーセプトロンの値')
 print(m)
 print('関数パーセプトロンの値')
 print(f(m))
-  
+
+
 
 def AND(x, y):
+    a=0
+    b=0
     r = np.array([x, y, 1]) #1はダミー
-    w = np.array([2, 2, -3]) #weight+threshold
-    m = np.dot(w,r)
+    w = np.array([2, 2, 2*b-3]) #weight+bias
+    m = np.dot(w*(1-2*a), r)
     return np.where(f(m) > 0, 1, 0)
     
 def OR(x, y):
+    a=0
+    b=1
     r = np.array([x, y, 1]) #1はダミー
-    w = np.array([2, 2, -1]) #weight+threshold  
-    m = np.dot(w,r)
+    w = np.array([2, 2, 2*b-3]) #weight+bias
+    m = np.dot(w*(1-2*a), r)
     return np.where(f(m) > 0, 1, 0)
 
 def NAND(x, y):
+    a=1
+    b=0
     r = np.array([x, y, 1]) #1はダミー
-    w = np.array([2, 2, -3]) #weight+threshold    
-    m = np.dot(-w,r)
+    w = np.array([2, 2, 2*b-3]) #weight+bias
+    m = np.dot(w*(1-2*a), r)
     return np.where(f(m) > 0, 1, 0)
     
 def NOR(x, y):
+    a=1
+    b=1
     r = np.array([x, y, 1]) #1はダミー
-    w = np.array([2, 2, -1]) #weight+threshold    
-    m = np.dot(-w,r)
+    w = np.array([2, 2, 2*b-3]) #weight+bias
+    m = np.dot(w*(1-2*a), r)
     return np.where(f(m) > 0, 1, 0)
+
 
 
 print('単層')
@@ -107,8 +123,10 @@ def NOT(x):
     
 print('NOT=' + str(NOT(x))) # NOT=NOT(x)
 
-print('ゲームクリア')
-print('活性化関数を表示します')
+print('活性化関数をかまします。')
+print('ゲームオーバー！')
+
+
 import matplotlib.pylab as plt
 x = np.arange(-10.0, 10.0, 0.1)
 y = f(x)
