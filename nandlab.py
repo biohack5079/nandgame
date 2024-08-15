@@ -1,3 +1,4 @@
+
 # NANDからXORを創るゲーム
 
 
@@ -123,8 +124,9 @@ def NOT(x):
     
 print('NOT=' + str(NOT(x))) # NOT=NOT(x)
 
-print('活性化関数をかまします。')
 print('ゲームオーバー！')
+print('活性化関数をかまします。')
+
 
 
 import matplotlib.pylab as plt
