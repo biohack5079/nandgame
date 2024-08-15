@@ -1,4 +1,4 @@
-# NANDXORを創るゲーム
+# NANDからXORを創るゲーム
 
 
 import numpy as np
