@@ -96,19 +96,22 @@ print('NOR=' + str(NOR(x, y))) # NOR
 
 
 def NAND(x, y):
-    return 1-x*y
+    return 1-x*y #1-xy
 
 def AND(x, y):
-    return NAND(NAND(x, y), NAND(x, y))
+    return NAND(NAND(x, y), NAND(x, y)) #xy
     
 def OR(x, y):
-    return NAND(NAND(x, x), NAND(y, y))    
+    return NAND(NAND(x, x), NAND(y, y)) #x+y-xy 
 
 def XOR(x, y):
-    return NAND(NAND(NAND(x, y),y), NAND(x,NAND(x, y)))
+    return NAND(NAND(NAND(x, y),y), NAND(x,NAND(x, y))) #x+y-2xy
     
 def NOR(x, y):
-    return NAND( NAND(NAND(x, x), NAND(y, y)), NAND(NAND(x, x), NAND(y, y)) )
+    return NAND( NAND(NAND(x, x), NAND(y, y)), NAND(NAND(x, x), NAND(y, y)) ) #xy-x-y+1
+
+def XNOR(x, y):
+    return 1+2*x*y-x-y #1+2xy-x-y
 
 
 
@@ -119,13 +122,14 @@ print('NAND=' + str(NAND(x, y))) # NAND
 print('NOR=' + str(NOR(x, y))) # NOR
 
 print('XOR=' + str(XOR(x, y))) # XOR
+print('XNOR=' + str(XNOR(x, y))) # XNOR
 
 
 
 z = int(input('１か０を入力してください z= '))
 
 def NOT(z):
-    return NAND(z, z)
+    return NAND(z, z) #1-z
     
 print('NOT(z)=' + str(NOT(z))) # NOT=NOT(z)
 
