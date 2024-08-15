@@ -1,3 +1,5 @@
+  
+    
 # NANDからXORを創るゲーム
 
 
@@ -14,6 +16,7 @@ w = np.array([2, 2])
 def f(x):
     return np.where(x > 0, 1, 0)
 
+#テスト
 
 #AND  
 s= 3 #threshold
@@ -122,8 +125,9 @@ def NOT(x):
     
 print('NOT=' + str(NOT(x))) # NOT=NOT(x)
 
-print('ゲームオーバー！')
 print('活性化関数をかまします。')
+print('ゲームオーバー！')
+
 
 import matplotlib.pylab as plt
 x = np.arange(-10.0, 10.0, 0.1)
