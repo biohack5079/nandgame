@@ -1,99 +1,42 @@
-
-# NANDからXNORを創るゲーム
-
+#論理回路学習ゲーム
 
 import numpy as np
+
+#活性化関数(シグモイド)
+def f(x):
+    return 4 / (1 + np.exp(-x)) -2
+    
+
+
+def p(r, w): #パーセプトロン
+    m = np.dot(r, w) #内積 2x+2y+s
+    return f(m) #活性化関数を作用
+
 
 #テスト
 x = int(input('１か０を入力してください x: '))
 y = int(input('１か０を入力してください y: '))
-r = np.array([x, y])
-w = np.array([2, 2]) 
+b = int(input('１でOR,０でANDになります。b: '))
+a = int(input('１でNOR,NAND,０でそのまま a: '))
 
 
-# step関数
+s = 2*b-3
+r = np.array([x, y, 1]) #入力値ベクトル
+w = np.array([2, 2, s]) #重みの基底値
+w = w*(1-2*a) #符号を反転
+
+print(str(np.dot(r, w))+' #パーセプトロンから出る値') #内積 2x+2y+s
+print(str(p(r, w))+' #活性化関数かました値')
+
+
+# もう1度step関数をかます
 def f(x):
     return np.where(x > 0, 1, 0)
-
-#テスト
-
-#AND  
-s= 3 #threshold
-m = np.dot(w,r) - s
-print('符号に注目してください')
-print('andパーセプトロンの値')
-print(m)
-print('関数パーセプトロンの値')
-print(f(m))
-
-#OR
-s = 1 #threshold
-m = np.dot(w,r) - s
-print('orパーセプトロンの値')
-print(m)
-print('関数パーセプトロンの値')
-print(f(m))
-
-#NAND
-s = -3 #threshold
-m = np.dot(-w,r) - s
-print('nandパーセプトロンの値')
-print(m)
-print('関数パーセプトロンの値')
-print(f(m))
-
-#NOR
-s = -1 #threshold
-m = np.dot(-w,r) - s
-print('norパーセプトロンの値')
-print(m)
-print('関数パーセプトロンの値')
-print(f(m))
-
-
-
-def AND(x, y):
-    a=0
-    b=0
-    r = np.array([x, y, 1]) #1はダミー
-    w = np.array([2, 2, 2*b-3]) #weight+bias
-    m = np.dot(w*(1-2*a), r)
-    return np.where(f(m) > 0, 1, 0)
     
-def OR(x, y):
-    a=0
-    b=1
-    r = np.array([x, y, 1]) #1はダミー
-    w = np.array([2, 2, 2*b-3]) #weight+bias
-    m = np.dot(w*(1-2*a), r)
-    return np.where(f(m) > 0, 1, 0)
-
-def NAND(x, y):
-    a=1
-    b=0
-    r = np.array([x, y, 1]) #1はダミー
-    w = np.array([2, 2, 2*b-3]) #weight+bias
-    m = np.dot(w*(1-2*a), r)
-    return np.where(f(m) > 0, 1, 0)
-    
-def NOR(x, y):
-    a=1
-    b=1
-    r = np.array([x, y, 1]) #1はダミー
-    w = np.array([2, 2, 2*b-3]) #weight+bias
-    m = np.dot(w*(1-2*a), r)
-    return np.where(f(m) > 0, 1, 0)
+print(str(p(r, w))+'   #ステップ関数でリセットした値(真偽値)')
 
 
-
-print('単層')
-print('AND=' + str(AND(x, y))) # AND
-print('OR=' + str(OR(x, y))) # OR
-print('NAND=' + str(NAND(x, y))) # NAND
-print('NOR=' + str(NOR(x, y))) # NOR
-
-
-
+#多層化された論理回路の挙動
 
 def NAND(x, y):
     return 1-x*y # =1-xy
@@ -112,11 +55,13 @@ def XOR(x, y):
 
 def XNOR(x, y):
     return NAND( NAND(NAND(NAND(x, y),y), NAND(x,NAND(x, y))) , NAND(NAND(NAND(x, y),y), NAND(x,NAND(x, y))) ) # =1+2xy-x-y
+    
 
+#活性化関数(シグモイド)
+def f(x):
+    return 4 / (1 + np.exp(-x)) -2
 
-
-
-print('多層')
+print('多層化された論理回路の挙動')
 print('AND=' + str(AND(x, y))) # AND
 print('OR=' + str(OR(x, y))) # OR
 print('NAND=' + str(NAND(x, y))) # NAND
@@ -124,15 +69,6 @@ print('NOR=' + str(NOR(x, y))) # NOR
 
 print('XOR=' + str(XOR(x, y))) # XOR
 print('XNOR=' + str(XNOR(x, y))) # XNOR
-
-
-
-z = int(input('１か０を入力してください z= '))
-
-def NOT(z):
-    return NAND(z, z) #1-z
-    
-print('NOT(z)=' + str(NOT(z))) # NOT=NOT(z)
 
 if str(XNOR(x, y)) == '0' or str(XNOR(x, y)) == '1':
     print('ゲームクリア')
@@ -142,9 +78,6 @@ else:
 
     import matplotlib.pylab as plt
     x = np.arange(-10.0, 10.0, 0.1)
-    y = f(x)
-    plt.plot(x, y)
-    plt.show()
-    y = f(XNOR(x, y))
-    plt.plot(x, y)
+    z = f(x)
+    plt.plot(x, z)
     plt.show()
