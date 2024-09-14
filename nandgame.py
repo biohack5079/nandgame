@@ -19,7 +19,7 @@ button.pack()
 def nandgame():
     x = int(e1.get())
     y = int(e2.get())
-    display = "\nAND=" + str(x*y) + "です\n""NAND=" + str(1-x*y) + "です\n""OR=" + str(x+y-x*y) + "です\n""NOR=" + str(1-x-y+x*y) + "です\n""XOR=" + str(x+y-2*x*y) + "です\n""XNOR=" + str(1-x-y+2*x*y) + "です\n"
+    display = "AND=" + str(x*y) + "です\n""NAND=" + str(1-x*y) + "です\n""OR=" + str(x+y-x*y) + "です\n""NOR=" + str(1-x-y+x*y) + "です\n""XOR=" + str(x+y-2*x*y) + "です\n""XNOR=" + str(1-x-y+2*x*y) + "です\n"
     top["text"] = display
 
 
