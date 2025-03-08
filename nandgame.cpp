@@ -1,92 +1,92 @@
-#include <windows.h>  // Windows API functions and definitions
-#include <string>     // For std::wstring
-#include <sstream>    // For std::wostringstream
-#include <iostream>   // Standard I/O streams
+#include <windows.h>  // Windows API の関数と定義を含む
+#include <string>     // std::wstring 用
+#include <sstream>    // std::wostringstream 用
+#include <iostream>   // 標準入出力ストリーム
 
-// Control IDs for identifying UI elements
-#define IDC_EDIT_X 1001           // ID for the first input field (X value)
-#define IDC_EDIT_Y 1002           // ID for the second input field (Y value)
-#define IDC_CALCULATE_BUTTON 1003 // ID for the calculation button
-#define IDC_RESULT_LABEL 1004     // ID for the result display label
+// UI 要素を識別するためのコントロール ID
+#define IDC_EDIT_X 1001           // 1つ目の入力フィールド（X 値）の ID
+#define IDC_EDIT_Y 1002           // 2つ目の入力フィールド（Y 値）の ID
+#define IDC_CALCULATE_BUTTON 1003 // 計算ボタンの ID
+#define IDC_RESULT_LABEL 1004     // 結果表示ラベルの ID
 
 /**
- * Window procedure function that handles window messages.
+ * ウィンドウプロシージャ関数: ウィンドウメッセージを処理する
  * 
- * @param hwnd      Handle to the window
- * @param msg       Message identifier
- * @param wParam    Additional message information
- * @param lParam    Additional message information
- * @return          Result of message processing
+ * @param hwnd      ウィンドウハンドル
+ * @param msg       メッセージ識別子
+ * @param wParam    追加のメッセージ情報
+ * @param lParam    追加のメッセージ情報
+ * @return          メッセージ処理の結果
  */
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-    // Static variables to store control handles and result text
+    // UI コントロールのハンドルと結果テキストを保持する静的変数
     static HWND editX, editY, calculateButton, resultLabel;
     static std::wstring resultText;
-    WCHAR buffer[256]; // Buffer for storing text from input fields
+    WCHAR buffer[256]; // 入力フィールドのテキストを格納するバッファ
     
-    // Process different message types
+    // メッセージの種類ごとに処理
     switch (msg) {
         case WM_CREATE: {
-            // Common style for static controls
+            // STATIC コントロールの共通スタイル
             const DWORD staticStyle = WS_VISIBLE | WS_CHILD;
             
-            // Create title label
+            // タイトルラベルを作成
             CreateWindowW(L"STATIC", L"NANDGAME", staticStyle | SS_CENTER, 
                          20, 20, 760, 40, hwnd, NULL, NULL, NULL);
             
-            // Create instruction label
+            // 説明ラベルを作成
             CreateWindowW(L"STATIC", L"1か0を入力してください", staticStyle, 
                          20, 70, 760, 30, hwnd, NULL, NULL, NULL);
             
-            // Common style for edit controls
+            // EDIT コントロールの共通スタイル
             const DWORD editStyle = WS_VISIBLE | WS_CHILD | WS_BORDER | ES_NUMBER;
             
-            // Create first input field (X)
+            // 1つ目の入力フィールド（X）を作成
             editX = CreateWindowW(L"EDIT", L"", editStyle, 
                                  20, 110, 100, 30, hwnd, (HMENU)IDC_EDIT_X, NULL, NULL);
             
-            // Create second input field (Y)
+            // 2つ目の入力フィールド（Y）を作成
             editY = CreateWindowW(L"EDIT", L"", editStyle, 
                                  140, 110, 100, 30, hwnd, (HMENU)IDC_EDIT_Y, NULL, NULL);
             
-            // Create calculation button
+            // 計算ボタンを作成
             calculateButton = CreateWindowW(L"BUTTON", L"１か0を入力", WS_VISIBLE | WS_CHILD,
                                            260, 110, 100, 30, hwnd, (HMENU)IDC_CALCULATE_BUTTON, NULL, NULL);
             
-            // Create result display label
+            // 結果表示用のラベルを作成
             resultLabel = CreateWindowW(L"STATIC", L"", staticStyle,
                                        20, 150, 760, 260, hwnd, (HMENU)IDC_RESULT_LABEL, NULL, NULL);
             break;
         }
         
         case WM_COMMAND: {
-            // Process button click
+            // ボタンクリックの処理
             if (LOWORD(wParam) == IDC_CALCULATE_BUTTON) {
-                // Lambda function to retrieve and convert text from edit controls
+                // 入力フィールドのテキストを取得し、整数に変換するラムダ関数
                 auto getText = [&buffer](HWND ctrl) -> int {
                     GetWindowTextW(ctrl, buffer, sizeof(buffer) / sizeof(WCHAR));
-                    return _wtoi(buffer); // Convert text to integer
+                    return _wtoi(buffer); // 文字列を整数に変換
                 };
                 
-                // Get X and Y values from input fields
+                // X と Y の値を取得
                 int x = getText(editX);
                 int y = getText(editY);
                 
-                // Create stream for building result text
+                // 結果テキストを作成するためのストリーム
                 std::wostringstream oss;
                 
-                // Calculate AND result once for reuse
+                // AND の結果（後の計算で再利用）
                 int andResult = x * y;
                 
-                // Calculate and format all logical operations
-                oss << L"AND = " << andResult << L"です\n"                // AND operation
-                    << L"NAND = " << (1 - andResult) << L"です\n"        // NAND operation (NOT AND)
-                    << L"OR = " << (x | y) << L"です\n"                  // OR operation using bitwise OR
-                    << L"NOR = " << (1 - (x | y)) << L"です\n"           // NOR operation (NOT OR)
-                    << L"XOR = " << (x ^ y) << L"です\n"                 // XOR operation using bitwise XOR
-                    << L"XNOR = " << (1 - (x ^ y)) << L"です\n";         // XNOR operation (NOT XOR)
+                // 各論理演算の計算とフォーマット
+                oss << L"AND = " << andResult << L"です\n"                // AND 演算
+                    << L"NAND = " << (1 - andResult) << L"です\n"        // NAND 演算 (NOT AND)
+                    << L"OR = " << (x | y) << L"です\n"                  // OR 演算 (ビット OR)
+                    << L"NOR = " << (1 - (x | y)) << L"です\n"           // NOR 演算 (NOT OR)
+                    << L"XOR = " << (x ^ y) << L"です\n"                 // XOR 演算 (ビット XOR)
+                    << L"XNOR = " << (1 - (x ^ y)) << L"です\n";         // XNOR 演算 (NOT XOR)
                 
-                // Store result text and update display
+                // 結果テキストを更新し、ラベルに表示
                 resultText = oss.str();
                 SetWindowTextW(resultLabel, resultText.c_str());
             }
@@ -94,64 +94,64 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
         }
         
         case WM_DESTROY:
-            // Post quit message when window is closed
+            // ウィンドウが閉じられたときに終了メッセージを送信
             PostQuitMessage(0);
             break;
             
         default:
-            // Let default window procedure handle unprocessed messages
+            // 既定のウィンドウプロシージャに処理を委ねる
             return DefWindowProcW(hwnd, msg, wParam, lParam);
     }
     return 0;
 }
 
 /**
- * Application entry point for Windows GUI applications.
+ * Windows GUI アプリケーションのエントリポイント
  * 
- * @param hInstance      Handle to the current instance of the application
- * @param hPrevInstance  Always NULL (not used)
- * @param lpCmdLine      Command line arguments
- * @param nCmdShow       Controls how the window is shown
- * @return               Exit code
+ * @param hInstance      現在のアプリケーションインスタンスのハンドル
+ * @param hPrevInstance  以前のインスタンス（常に NULL）
+ * @param lpCmdLine      コマンドライン引数
+ * @param nCmdShow       ウィンドウの表示方法を制御
+ * @return               終了コード
  */
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-    // Initialize window class structure
+    // ウィンドウクラスの初期化
     WNDCLASSW wc = {};
-    wc.lpfnWndProc = WndProc;            // Window procedure function
-    wc.hInstance = hInstance;            // Application instance handle
-    wc.lpszClassName = L"NANDGAME";      // Window class name
+    wc.lpfnWndProc = WndProc;            // ウィンドウプロシージャ関数
+    wc.hInstance = hInstance;            // アプリケーションのインスタンスハンドル
+    wc.lpszClassName = L"NANDGAME";      // ウィンドウクラス名
     
-    // Lambda function for displaying error messages
+    // エラーメッセージを表示するラムダ関数
     auto showError = [](const wchar_t* msg) -> int {
         MessageBoxW(NULL, msg, L"Error", MB_ICONERROR);
-        return 1; // Return error code
+        return 1; // エラーコードを返す
     };
     
-    // Register window class
+    // ウィンドウクラスを登録
     if (!RegisterClassW(&wc))
-        return showError(L"Failed to register window class");
+        return showError(L"ウィンドウクラスの登録に失敗しました");
     
-    // Create main window
+    // メインウィンドウを作成
     HWND hwnd = CreateWindowExW(
-        0,                              // Extended window style
-        L"NANDGAME",                    // Window class name
-        L"NANDGAME",                    // Window title
-        WS_OVERLAPPEDWINDOW | WS_VISIBLE, // Window style
-        CW_USEDEFAULT, CW_USEDEFAULT,   // Initial position (default)
-        800, 450,                       // Window size
-        NULL, NULL, hInstance, NULL     // Parent, menu, instance, and creation params
+        0,                              // 拡張ウィンドウスタイル
+        L"NANDGAME",                    // ウィンドウクラス名
+        L"NANDGAME",                    // ウィンドウタイトル
+        WS_OVERLAPPEDWINDOW | WS_VISIBLE, // ウィンドウスタイル
+        CW_USEDEFAULT, CW_USEDEFAULT,   // 初期位置（デフォルト）
+        800, 450,                       // ウィンドウサイズ
+        NULL, NULL, hInstance, NULL     // 親、メニュー、インスタンス、作成パラメータ
     );
     
-    // Check if window creation succeeded
+    // ウィンドウの作成に失敗した場合
     if (!hwnd)
-        return showError(L"Failed to create window");
+        return showError(L"ウィンドウの作成に失敗しました");
     
-    // Main message loop
+    // メインメッセージループ
     MSG msg = {};
     while (GetMessage(&msg, NULL, 0, 0)) {
-        TranslateMessage(&msg);         // Translate virtual key messages
-        DispatchMessage(&msg);          // Dispatch message to window procedure
+        TranslateMessage(&msg);         // 仮想キーのメッセージを変換
+        DispatchMessage(&msg);          // ウィンドウプロシージャへメッセージを送信
     }
     
-    return 0; // Return success code
+    return 0; // 正常終了
 }
