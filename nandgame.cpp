@@ -50,7 +50,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
                                  140, 110, 100, 30, hwnd, (HMENU)IDC_EDIT_Y, NULL, NULL);
             
             // 計算ボタンを作成
-            calculateButton = CreateWindowW(L"BUTTON", L"１か0を入力", WS_VISIBLE | WS_CHILD,
+            calculateButton = CreateWindowW(L"BUTTON", L"１か０を入力", WS_VISIBLE | WS_CHILD,
                                            260, 110, 100, 30, hwnd, (HMENU)IDC_CALCULATE_BUTTON, NULL, NULL);
             
             // 結果表示用のラベルを作成
