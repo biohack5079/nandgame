@@ -12,7 +12,7 @@ e1 = tkinter.Entry(root)
 e1.pack()
 e2 = tkinter.Entry(root)
 e2.pack()
-button = tkinter.Button(root, text="１か0を入力")
+button = tkinter.Button(root, text="1か0を入力")
 button.pack()
 
 
